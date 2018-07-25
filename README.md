@@ -48,7 +48,7 @@ the scope of this application.
 -e option when decrypting the file. You will need to match the version. 
 
 
-    (c) Charles Shiflett 2016 
+    (c) Charles Shiflett 2018
 
     Released under the LGPL 3.0, which should be included with this work.
 
