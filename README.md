@@ -49,5 +49,6 @@ the scope of this application.
 
 
     (c) Charles Shiflett 2016 
+
     Released under the LGPL 3.0, which should be included with this work.
 
