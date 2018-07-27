@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 
 EasyCrypt; A python tool for encrypting files
@@ -48,10 +49,6 @@ the scope of this application.
 
 3) Can I decrypt a file that contains embedded code?  Yes,  just add the
 -e option when decrypting the file. You will need to match the version. 
-
-
-(c) Charles Shiflett 2016 
-    Released under the LGPL 3.0, which should be included with this work.
 
 """
 
@@ -144,7 +141,7 @@ exit ${ret}
 def decrypt( infile, outfile, embed=False ):
   offset=0
   if embed:
-    fi = getbytes(infile, -1, 16384)
+    fi = getbytes(infile, 16384, 0)
     try: 
       idx = fi.find("======%s" % "=====")
     except:
