@@ -86,11 +86,12 @@ def parseargs():
 
   return args, infile, outfile
 
-def getcipher( pw, iv, rounds=300000 ):
+def getcipher( pw, iv, rounds=300000, tag=None ):
   for i in range(rounds):
     idx = struct.pack( "i", i )
     pw = hashlib.sha256( idx + iv + pw ).digest()
-  return Cipher( algorithms.AES(pw), modes.GCM(iv), backend=default_backend() )
+  return Cipher(
+    algorithms.AES(pw), modes.GCM(iv, tag=tag), backend=default_backend() )
   
 def encrypt( infile, outfile, embed=False ):
   iv = os.urandom(16)
@@ -156,9 +157,9 @@ def decrypt( infile, outfile, embed=False ):
     # Fallback for Python 2 
     pw = getpass.getpass()
 
-  dec = getcipher( pw, iv ).decryptor()
   fi = getbytes(infile, -1, 16+offset)
-  msg = dec.update( fi[:-16] ) + dec.finalize_with_tag((fi[-16:]))
+  dec = getcipher( pw, iv, tag=fi[-16:] ).decryptor()
+  msg = dec.update( fi[:-16] ) + dec.finalize()
   putbytes( outfile, msg, 0 )
 
 try: 
