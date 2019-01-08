@@ -19,7 +19,7 @@ Here are some examples:
     # and now decrypt
     ./encrypted.file decrypted.file
 
-    # Pipe example
+    # Pipe example (I realize that compressing encrypted data is stupid)
     dd if=/dev/urandom bs=1M count=64 | ./easycrypt.py | gzip > out.enc.gz
 
 Known Issues:
