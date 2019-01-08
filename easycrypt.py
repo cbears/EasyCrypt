@@ -59,7 +59,10 @@ def parseargs():
     if args.input == sys.stdin:
       args.output = sys.stdout
     else:
-      args.output = args.input
+      if args.shexec:
+        args.output = sys.stdout
+      else:
+        args.output = args.input
 
   return args, args.input, args.output
 
@@ -100,11 +103,6 @@ def encrypt( infile, outfile, embed=False ):
       pass
     self_extract = """#!/usr/bin/env bash
 tmp_file=$(mktemp -t tmp-easycrypt-XXXXXXXXXX.py)
-if [ -z ${1} ]; then
-  echo "usage:" $0 "DEST"
-  exit -1
-fi
-#echo ${tmp_file}
 cat << %(tag)s > $tmp_file
 %(data)s
 %(tag)s
@@ -127,9 +125,6 @@ exit ${ret}
 def decrypt( infile, outfile, embed=False ):
   offset=0
   if embed:
-    if outfile == '-':
-      sys.stderr.write("Embed decrypt to stdout not supported\n")
-      exit(-1)
     fi = getbytes(infile, 16384, 0)
     try:
       idx = fi.find("======%s" % "=====")

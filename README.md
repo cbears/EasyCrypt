@@ -19,8 +19,8 @@ Here are some examples:
     # and now decrypt
     ./encrypted.file decrypted.file
 
-    # Pipe example (I realize that compressing encrypted data is stupid)
-    dd if=/dev/urandom bs=1M count=64 | ./easycrypt.py | gzip > out.enc.gz
+    # Pipe example 
+    dd if=/dev/urandom bs=1M count=64 | ./easycrypt.py > out.enc.gz
 
 Known Issues:
 

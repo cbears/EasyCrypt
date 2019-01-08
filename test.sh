@@ -1,7 +1,7 @@
 rm -rf tmp
 mkdir tmp
 
-dd if=/dev/urandom of=tmp/file.orig bs=1M count=64
+dd if=/dev/urandom of=tmp/file.orig bs=1M count=4
 sum=`shasum tmp/file.orig | cut -d\  -f 1`
 
 function test_result()
@@ -43,6 +43,17 @@ do
   res=`shasum tmp/file.$pver.pipe | cut -d\  -f 1`
   test_result
   res=None
+
+  echo -n "Test $pver embed 2... "
+  cat tmp/file.orig | $pver ./easycrypt.py -s > tmp/file.$pver.pemb.enc
+  chmod a+x tmp/file.$pver.pemb.enc
+  tmp/file.$pver.pemb.enc > tmp/file.$pver.pemb
+  res=`shasum tmp/file.$pver.pemb | cut -d\  -f 1`
+  test_result
+  res=None
+
+
+
 done
 
 
