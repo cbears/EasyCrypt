@@ -52,7 +52,13 @@ do
   test_result
   res=None
 
-
+  echo -n "Test $pver overwrite... "
+  cp tmp/file.orig tmp/file.inplace.$pver
+  $pver ./easycrypt.py tmp/file.inplace.$pver
+  $pver ./easycrypt.py -d tmp/file.inplace.$pver
+  res=`shasum tmp/file.inplace.$pver | cut -d\  -f 1`
+  test_result
+  res=None
 
 done
 
