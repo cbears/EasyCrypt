@@ -13,7 +13,7 @@ the original password used for encryption.
 
 Requires python cryptography library: 
 
-  pip install cryptography
+    pip install cryptography
 
 Here are some usage examples:
 
