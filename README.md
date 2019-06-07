@@ -3,15 +3,17 @@ EasyCrypt; A python tool for encrypting files
 EasyCrypt is meant to be an easy way of encrypting and decrypting files, while
 providing secure and robust crypto. 
 
-Your crypto key, which is typically the weakest link when encrypting a file, 
-is secured with a 300,000 round PBKDF2 derivative. This increases the
-computational complexity to generate a single key, and thus dramatically
-increases the difficulty to decrypt the file through brute force.
+When encrypting/decrypting your password is hashed with a 300,000 round PBKDF2
+derivative. The hash function is SHA256, and the resultant hash along with a 
+random IV is used as the key for AES128-GCM encryption of your file.
 
-The file itself is crypted with AES128-GCM using a random IV. This is typically
-a high performance crypt and hash algorithm which is able to take advantage
-of hardware support on modern CPU's. Using this provides both a means
-of securing your file as well as verifying the integrity of your file.
+EasyCrypt has an option to embed the decryption code into the resultant file
+which provides a clear and easy way to decrypt the file so long as you have
+the original password used for encryption.
+
+Requires python cryptography library: 
+
+  pip install cryptography
 
 Here are some usage examples:
 
@@ -36,7 +38,7 @@ Known Issues:
    the Python Cryptography Library. 
 
 2. Some features may not work on non Unix platforms. If you are in doubt, you
-   are strongly encouraged to test using the included 'test.sh' script. 
+   are strongly encouraged to test using the methods shown in 'test.sh'.
    
 3. Probably does not work on Python 2.6 and older. (Python 2.7/3 are supported)
 
