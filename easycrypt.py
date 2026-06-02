@@ -1,4 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env -S uv -q run
+# /// script
+# dependencies = [
+#   "cryptography",
+# ]
+# ///
+
 import os
 import sys
 import argparse
@@ -106,7 +112,7 @@ tmp_file=$(mktemp -t tmp-easycrypt-XXXXXXXXXX.py)
 cat << %(tag)s > $tmp_file
 %(data)s
 %(tag)s
-/usr/bin/env python $tmp_file -d -s $0 $1
+uv -q run $tmp_file -d -s $0 $1
 ret=$?
 rm ${tmp_file}
 exit ${ret}
