@@ -1,5 +1,7 @@
 EasyCrypt; A python tool for encrypting files
 
+**NOTE**: *You probably DON'T want to use this for anything other than a POC*
+
 EasyCrypt is meant to be an easy way of encrypting and decrypting files, while
 providing secure and robust crypto. It's also meant to be simple enough that
 even if you don't know python, it should be clear what is happening by looking
